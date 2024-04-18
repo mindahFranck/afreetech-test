@@ -1,0 +1,390 @@
+<div class="block">
+
+  <div class="col-12 flex align-content-center justify-content-center p-0" style="height: 20px;">
+    <p class="font-bold m-0 align-content-center" style="text-align: center;font-size: 22px;font-style: italic;">
+      Projet Test Pour le post de developpeur SIG
+    </p>
+
+  </div>
+
+  <div class="flex bg-green-600 p-1 justify-content-end" style="height: 30px;">
+
+  
+    <div (click)="showDialog()" *ngIf="!state"
+      class="flex-content flex px-2 py-2 bg-white font-bold border-round align-items-center">
+      <i class="pi pi-cog"></i>
+
+    </div>
+    <div *ngIf="state" (click)="op.toggle($event)"
+      class="flex-content flex px-2 py-2 bg-white font-bold border-round align-items-center">
+      <i class="pi pi-caret-down"></i>
+
+    </div>
+
+  </div>
+</div>
+
+<p-overlayPanel #op>
+  <p class="m-0" style="cursor: pointer;" (click)="convert = true">
+   Convertir
+  </p>
+  <p-divider></p-divider>
+
+  <p class="m-0" style="cursor: pointer;" (click)="addCentreInteret()">
+    Gestion des centres d'interets
+  </p>
+  <p-divider></p-divider>
+  <p class="m-0" style="cursor: pointer;" (click)="listCentre()">
+    Gestion des Categories
+  </p>
+  <p-divider></p-divider>
+
+  <p class="m-0" style="cursor: pointer;" (click)="logout()">
+    Deconnection
+  </p>
+</p-overlayPanel>
+
+
+
+<p-dialog [(visible)]="visible" [closable]="false" [draggable]="false" [style]="{ width: '20%' }" [modal]="true"
+  [resizable]="false">
+  <ng-template pTemplate="headless">
+    <form [formGroup]="formulaire">
+      <div class="flex flex-column px-3 py-5 gap-4 bg-green-800" style="border-radius: 12px; ">
+
+        <div class="inline-flex flex-column gap-2 input-wrapper input-field"
+          [class.error]="username.invalid && username.hasError('required','type')">
+          <label for="username" class="text-primary-50 font-semibold">Email</label>
+          <input pInputText id="username" type="name" required formControlName="username"
+            class="bg-white-alpha-20 border-none p-3 text-primary-50" />
+        </div>
+        <div *ngIf="username.invalid && (username.touched || username.dirty) ">
+          <span class="error fs-6 text-danger mx-1 my-1 " *ngIf="username.errors?.required ">*l'
+            email est obligatoire</span>
+          <span class="error fs-6 text-danger mx-1 my-1 " *ngIf="username.errors?.email ">*l'email
+            n'est pas valide</span>
+
+        </div>
+        <div class="inline-flex flex-column gap-2 input-wrapper input-field">
+          <label for="password" class="text-primary-50 font-semibold">Mots de passe</label>
+          <input pInputText id="password" required formControlName="password"
+            class="bg-white-alpha-20 border-none p-3 text-primary-50" type="password" />
+        </div>
+        <div *ngIf="password.invalid && (password.touched || password.dirty) ">
+          <span class="error fs-6 text-danger mx-2 my-2 " *ngIf="password.errors?.required ">*le mots de passe est
+            obligatoire
+          </span>
+
+
+        </div>
+        <div class="flex align-items-center gap-2">
+          <p-button label="Connecter" (click)="login()" [disabled]="submitted" [text]="true"
+            styleClass="w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" class="w-full">
+            <i *ngIf="submitted" class="pi pi-spin pi-spinner"></i>
+
+          </p-button>
+          <p-button label="Fermer" (click)="closeDialog()" [text]="true"
+            styleClass="w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"
+            class="w-full"></p-button>
+        </div>
+      </div>
+    </form>
+
+  </ng-template>
+</p-dialog>
+
+
+<p-dialog [(visible)]="visible1" header="Liste centre d'interet" [closable]="true" [maximizable]="true" [draggable]="false"
+  [style]="{ width: '60%', }" [modal]="true" [resizable]="true">
+  <div class="col">
+
+    <p-progressBar *ngIf="status" mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+    <p-table [value]="centres"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Affiche de {first} à {last} sur {totalRecords} entrée"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <div>
+            <h3>          Liste des Centres d'interets
+            </h3>
+          </div>
+          <div>
+            <p-button icon="pi pi-plus" (click)="addCentreDialog()" label="Ajouter" size="small"></p-button>
+
+          </div>
+        </div>
+       
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Noms</th>
+          <th>Categories</th>
+
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-categorie>
+        <tr>
+          <td>{{categorie.noms}}</td>
+          <td>{{categorie.CategoriesModel.libelle}} </td>
+      
+          <td>
+            <button pButton pRipple icon="pi pi-pencil"
+            class="p-button-rounded p-button-primary"
+            ></button>
+        <button pButton pRipple icon="pi pi-trash"
+            class="p-button-rounded p-button-danger"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+
+</p-dialog>
+
+
+
+<p-dialog [(visible)]="addUsers" header="Ajouter un centre d'interet" [closable]="true"  [draggable]="false"
+  [style]="{ width: '30%', background: 'white', color:'black' }" [modal]="true" [resizable]="false">
+
+  <form [formGroup]="centreFormulaire">
+    <div class="flex flex-column  p-3" style="border-radius: 12px; ">
+      <div class="col-12 block">
+        <div class="col-12">
+
+          <div class=" flex-column gap-2 input-wrapper"
+            [class.error]="name.invalid && name.hasError('required','type')">
+            <label for="name" style="color: black !important;" class=" font-semibold">Noms </label>
+            <input pInputText id="name" required formControlName="noms"
+              class="text-black" style="width: 100% !important;" />
+          </div>
+          <div *ngIf="name.invalid && (name.touched || name.dirty) ">
+            <span class="error fs-6 text-danger mx-1 my-1 " *ngIf="name.errors?.required ">*le nom est
+              obligatoire</span>
+
+
+          </div>
+        </div>
+        <div class="col-12">
+          <div class=" flex-column gap-2 input-wrapper"
+           >
+            <label for="CategoriesModelId" style="color: black !important;" class="text-black font-semibold">Categories</label>
+            <p-dropdown    [style]="{width: '100%', borderRadius: '10px', minHeight: '48px'}" 
+            formControlName="CategoriesModelId" [options]="categories" optionLabel="libelle" optionValue="id"
+
+           />
+          </div>
+         
+        </div>
+        <div class="col-12">
+
+          <div class=" flex-column gap-2 input-wrapper"
+            [class.error]="longitude.invalid && longitude.hasError('required','type')">
+            <label for="longitude" style="color: black !important;" class=" font-semibold">Longitude </label>
+            <input pInputText id="longitude" type="number" required formControlName="longitude"
+              class="text-black" style="width: 100% !important;" />
+          </div>
+          <div *ngIf="longitude.invalid && (longitude.touched || longitude.dirty) ">
+            <span class="error fs-6 text-danger mx-1 my-1 " *ngIf="longitude.errors?.required ">*la longitude est
+              obligatoire</span>
+
+
+          </div>
+        </div>
+        <div class="col-12">
+
+          <div class=" flex-column gap-2 input-wrapper"
+            [class.error]="latitude.invalid && latitude.hasError('required','type')">
+            <label for="latitude" style="color: black !important;" class=" font-semibold">latitude </label>
+            <input pInputText id="latitude" required formControlName="latitude"
+              class="text-black" style="width: 100% !important;" />
+          </div>
+          <div *ngIf="latitude.invalid && (latitude.touched || latitude.dirty) ">
+            <span class="error fs-6 text-danger mx-1 my-1 " *ngIf="latitude.errors?.required ">*la latitude est
+              obligatoire</span>
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <span class="error fs-6 text-danger mx-2 my-2 " *ngIf="error ">*{{error}}.</span>
+      <div class=" col flex align-items-end justify-content-end">
+
+        <p-button label="Fermer" (click)="addUsers=false" class="mr-3" severity="secondary"
+         ></p-button>
+         <p-button label="Ajouter" (click)="addCentres()" [disabled]="useState" 
+        >
+         <i *ngIf="useState" class="pi pi-spin pi-spinner"></i>
+
+       </p-button>
+      </div>
+    </div>
+  </form>
+
+</p-dialog>
+<p-dialog header="Liste des Categories" [(visible)]="visibleBts" [resizable]="false" [draggable]="false" [modal]="true"
+  [style]="{width: '50%', background: 'white'}" [maximizable]="true">
+  <div class="col">
+
+    <p-progressBar *ngIf="statusBts" mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+    <p-table #dt  [value]="categories"
+    [paginator]="true"
+    [rows]="5"
+    [globalFilterFields]="['libelle']"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    currentPageReportTemplate="Affiche de {first} à {last} sur {totalRecords} entrée"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+         <p>
+          Liste des Categories
+         </p>
+         <button pButton pRipple label="Ajouter Une Categories" (click)="addCategories()"   icon="pi pi-plus" class="p-button-primary mr-2"></button>
+
+        </div>
+  
+        <span class="block mt-2 md:mt-0 p-input-icon-left col-12">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Rechercher..." [style]="{
+            width: '100%',
+            borderRadius: '10px',
+            minHeight: '48px',
+        }"/>
+      </span>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Libelle</th>
+
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-bts>
+        <tr>
+          <td>{{bts.libelle}}</td>
+  
+          <td>
+   
+        <button pButton pRipple icon="pi pi-trash"
+            class="p-button-rounded p-button-danger"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+
+  </div>
+</p-dialog>
+<p-dialog [(visible)]="addCategorie" header="Ajouter une categrories" [closable]="true"  [draggable]="false"
+  [style]="{ width: '30%', background: 'white', color:'black' }" [modal]="true" [resizable]="false">
+
+  <form [formGroup]="categoriesFormulaire">
+    <div class="flex flex-column  p-3" style="border-radius: 12px; ">
+      <div class="col-12 block">
+        <div class="col-12">
+
+          <div class=" flex-column gap-2 input-wrapper"
+            [class.error]="libelle.invalid && libelle.hasError('required','type')">
+            <label for="libelle" style="color: black !important;" class=" font-semibold">Libelle </label>
+            <input pInputText id="libelle" required formControlName="libelle"
+              class="text-black" style="width: 100% !important;" />
+          </div>
+          <div *ngIf="libelle.invalid && (libelle.touched || libelle.dirty) ">
+            <span class="error fs-6 text-danger mx-1 my-1 " *ngIf="libelle.errors?.required ">*le nom est
+              obligatoire</span>
+
+
+          </div>
+        </div>
+     
+      </div>
+
+
+
+      <span class="error fs-6 text-danger mx-2 my-2 " *ngIf="error ">*{{error}}.</span>
+      <div class=" col flex align-items-end justify-content-end">
+
+        <p-button label="Fermer" (click)="addCategorie=false" class="mr-3" severity="secondary"
+         ></p-button>
+         <p-button label="Ajouter" (click)="SaveCatgerories()" [disabled]="useState" 
+        >
+         <i *ngIf="useState" class="pi pi-spin pi-spinner"></i>
+
+       </p-button>
+      </div>
+    </div>
+  </form>
+
+</p-dialog>
+
+
+
+
+<p-dialog [(visible)]="convert" [style]="{width: '600px'}" header="Convertir" [modal]="true" class="p-fluid">
+    <ng-template pTemplate="content">
+      <form  [formGroup]="convertFormulaire">
+        <div class="col-12">
+
+          <div class=" flex-column gap-2 input-wrapper"
+            [class.error]="longitudes.invalid && longitudes.hasError('required','type')">
+            <label for="longitude" style="color: black !important;" class=" font-semibold">Longitude </label>
+            <input pInputText id="longitude" type="number" required formControlName="longitude"
+              class="text-black" style="width: 100% !important;" />
+          </div>
+          <div *ngIf="longitudes.invalid && (longitudes.touched || longitudes.dirty) ">
+            <span class="error fs-6 text-danger mx-1 my-1 " *ngIf="longitudes.errors?.required ">*la longitude est
+              obligatoire</span>
+
+
+          </div>
+        </div>
+        <div class="col-12">
+
+          <div class=" flex-column gap-2 input-wrapper"
+            [class.error]="latitudes.invalid && latitudes.hasError('required','type')">
+            <label for="latitudes" style="color: black !important;" class=" font-semibold">latitude</label>
+            <input pInputText id="latitudes" required formControlName="latitude"
+              class="text-black" style="width: 100% !important;" />
+          </div>
+          <div *ngIf="latitudes.invalid && (latitudes.touched || latitudes.dirty) ">
+            <span class="error fs-6 text-danger mx-1 my-1 " *ngIf="latitudes.errors?.required ">*la latitude est
+              obligatoire</span>
+
+
+          </div>
+
+          <p-fieldset legend="Resultat de la conversion">
+            x: {{x}} <br>
+            y: {{y}}
+
+        </p-fieldset>
+
+          <div class=" col flex align-items-end justify-content-end">
+
+            <p-button label="Fermer" (click)="convert=false" class="mr-3" severity="secondary"
+             ></p-button>
+             <p-button label="convertir" (click)="converts()"  >
+    
+           </p-button>
+          </div>
+        </div>
+      </form>
+
+    </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>

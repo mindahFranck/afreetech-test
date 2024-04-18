@@ -1,0 +1,34 @@
+name: APP pipelines
+
+
+on: [push]
+
+
+jobs:
+
+  run-shell-commands:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⚡️ Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            ./node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+      - name: 🔨 Build Project
+        run: |
+          npm install -g @angular/cli@16
+          npm install
+          ng build
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server:  "host du ftp"
+          username: "ftp username"
+          password: "ftp password"
+          local-dir: ./BUILD/

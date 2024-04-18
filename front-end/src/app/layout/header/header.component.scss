@@ -1,0 +1,83 @@
+::ng-deep .p-sidebar-backdrop {
+  display: none !important;
+}
+::ng-deep .p-dialog .p-dialog-content{
+
+  padding: 0px !important;
+}
+::ng-deep .p-dropdown{
+  width: 250px !important;
+}
+::ng-deep .p-dialog .p-dialog-header{
+  padding: 3px !important;
+  margin-left: 5px;
+}
+@media only screen and (max-width: 768px) {
+  .images{
+    display: none !important;
+  }
+  p{
+    font-size: 10px;
+    font-weight: bolder;
+  }
+
+}
+
+@media only screen and (max-width: 568px) {
+
+  .images{
+    display: none !important;
+  }
+  p{
+    font-size: 10px;
+    font-weight: bolder;
+  }
+
+}
+@media only screen and (max-width: 414px) {
+  .images{
+    display: none !important;
+  }
+  p{
+    font-size: 10px;
+    font-weight: bolder;
+  }
+
+}
+@media only screen and (max-width: 314px) {
+  .images{
+    display: none !important;
+  }
+  p{
+    font-size: 8px;
+    font-weight: bolder;
+  }
+
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 4) {
+  .images{
+    display: none !important;
+  }
+  p{
+    font-size: 10px;
+    font-weight: bolder;
+  }
+}
+.error{
+  color: red;
+  font-weight: bold;
+}
+::ng-deep .p-overlaypanel .p-overlaypanel-content{
+  padding: 5px !important;
+  font-weight: bold;
+  margin: 5px !important;
+
+}
+
+
+:host ::ng-deep .p-dropdown{
+  width: 100% !important;
+}
+:host:ng-deep .input{
+  width: 100% !important;
+}

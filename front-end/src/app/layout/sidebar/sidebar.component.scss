@@ -1,0 +1,120 @@
+::ng-deep .p-formsbar-backdrop {
+  display: none !important;
+}
+
+label{
+  font-size: 14px;
+}
+
+@media only screen and (min-width: 1024px) {
+  ::ng-deep .p-dropdown{
+    width: 250px !important;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+
+  .forms{
+    display: block !important;
+    justify-content: center;
+  align-items: center;
+  text-align: center
+  };
+::ng-deep .p-dropdown{
+  width: 100% !important;
+}
+  .boutton{
+    width: 100% !important;
+    display: block !important;
+    padding: 0px !important;
+    text-align: center;
+    justify-content: center;
+  }
+  .first{
+    margin-top: 8px !important;
+    margin-bottom: 4px;
+  }
+
+}
+
+
+@media only screen and (max-width: 768px) {
+
+  .forms{
+    display: block !important;
+    justify-content: center;
+  align-items: center;
+  text-align: center
+  };
+::ng-deep .p-dropdown{
+  width: 100% !important;
+}
+  .boutton{
+    display: block !important;
+    padding: 0px !important;
+    text-align: center;
+    justify-content: center;
+    width: 100% !important;
+
+  }
+  .first{
+    margin-top: 8px !important;
+    margin-bottom: 4px;
+  }
+
+}
+
+
+@media only screen and (max-width: 568px) {
+  .forms{
+    display: block !important;
+    justify-content: center;
+  align-items: center;
+  text-align: center
+  };
+
+::ng-deep .p-dropdown{
+  width: 100% !important;
+}
+
+  .boutton{
+    display: block !important;
+    padding: 0px !important;
+    text-align: center;
+    justify-content: center;
+    width: 100% !important;
+
+  }
+  .first{
+    margin-top: 8px !important;
+    margin-bottom: 4px;
+  }
+}
+@media only screen and (max-width: 414px) {
+
+  .forms{
+  display: block !important;
+  justify-content: center;
+  align-items: center;
+  text-align: center
+
+  };
+
+::ng-deep .p-dropdown{
+  width: 100% !important;
+}
+  .boutton{
+    display: block !important;
+    padding: 0px !important;
+    text-align: center;
+    justify-content: center;
+    width: 100% !important;
+
+
+  }
+  .first{
+    margin-top: 8px !important;
+    margin-bottom: 4px;
+  }
+}
+

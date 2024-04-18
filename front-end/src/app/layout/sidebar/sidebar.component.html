@@ -1,0 +1,93 @@
+<div style="width: 100%; height: 100%;">
+  <p class="text-bold" style="text-align: center;font-weight: bolder;">Unité Administrative</p>
+  <form [formGroup]="formulaire">
+    <div style="border-bottom: 1px solid greenyellow;" class="p-3 lg:p-1 xl:p-1">
+      <div class="forms " style="display: flex;justify-content: space-between;align-items: center;margin-bottom: 10px;">
+        <div style="text-align: center;font-weight: bolder;">
+          <label class="text-base lg:text-sm	 xl:text-sm	"  for="">Region</label>
+    
+        </div>
+        <div>
+          <p-dropdown [options]="regions" (onChange)="chargeDepartement($event)"  [ngModelOptions]="{standalone: true}"  [(ngModel)]="com" optionLabel="region" [showClear]="true" placeholder="Selectionner la region"></p-dropdown>
+    
+    
+        </div>
+    
+      </div>
+      <div class="forms " style="display: flex;justify-content: space-between;align-items: center;margin-bottom: 10px">
+        <div>
+          <label class="text-base lg:text-sm	 xl:text-sm	"  style="text-align: center;font-weight: bolder;" for="">Departement</label>
+    
+        </div>
+        <p-dropdown [options]="departements"  (onChange)="chargeCommunes($event)" [(ngModel)]="depart"  [ngModelOptions]="{standalone: true}"  optionLabel="departement" [showClear]="true" placeholder="Selectionner le departements"></p-dropdown>
+    
+      </div>
+      <div class="forms " style="display: flex;justify-content: space-between;align-items: center;margin-bottom: 10px;">
+        <div>
+          <label class="text-base lg:text-sm	 xl:text-sm	"  style="text-align: center;font-weight: bolder;" for="">Commune</label>
+    
+        </div>
+        <p-dropdown [options]="communes" formControlName="communeId"  optionValue="id" optionLabel="commune" [showClear]="true" placeholder="Selectionner la commune"></p-dropdown>
+    
+      </div>
+    </div>
+    <div style="border-bottom: 1px solid greenyellow;" class="p-3 lg:p-1 xl:p-1">
+      <div class="forms lg:m-0 xl:m-0" style="display: flex;justify-content: space-between;align-items: center;margin-bottom: 10px;">
+        <div style="text-align: center;font-weight: bolder;">
+          <label class="text-base lg:text-sm	 xl:text-sm	"  for="">Opérateurs</label>
+    
+        </div>
+        <div>
+          <p-dropdown [options]="operateur" formControlName="operateurs"   optionValue="code" optionLabel="code" [showClear]="true" placeholder="Selectionner l'opérateur"></p-dropdown>
+    
+        </div>
+    
+      </div>
+    
+    </div>
+    <div style="border-bottom: 1px solid greenyellow;" class="p-3 lg:p-1 xl:p-1">
+      <div class="forms" style="display: flex;justify-content: space-between;align-items: center;margin-bottom: 10px;">
+        <div style="text-align: center;font-weight: bolder;">
+          <label class="text-base lg:text-sm	 xl:text-sm	"  for="">Services</label>
+    
+        </div>
+        <div>
+          <p-dropdown [options]="technologies"   optionValue="code" optionLabel="code" [showClear]="true" placeholder="Selectionner le service"></p-dropdown>
+    
+        </div>
+    
+      </div>
+    
+    </div>
+    <div style="border-bottom: 1px solid greenyellow;" class="p-3 lg:p-1 xl:p-1">
+      <div class="forms" style="display: flex;justify-content: space-between;align-items: center;margin-bottom: 10px;">
+        <div style="text-align: center;font-weight: bolder;">
+          <label class="text-base lg:text-sm	 xl:text-sm	" for="">Caractéristiques</label>
+    
+        </div>
+        <div>
+          <input pInputText type="text" placeholder=""  />
+    
+        </div>
+    
+      </div>
+    
+    </div>
+  </form>
+
+<div style="height: 100px;" class="flex boutton align-items-center justify-content-center">
+
+
+  <p-button label="Cartographie" class="mr-4 " (click)="search()" severity="secondary">
+    <i class="pi pi-spin pi-spinner" *ngIf="searchs"></i>
+  </p-button>
+  <div class="first ">
+    <p-button label="Signal" (click)="signal()"   severity="secondary">
+     
+
+    </p-button>
+
+  </div>
+
+</div>
+</div>
